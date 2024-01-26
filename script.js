@@ -3,8 +3,8 @@
 const generateForm = document.querySelector(".generate-form");
 const imageGallery = document.querySelector(".image-gallery");
 
-const OPENAI_API_KEY = "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";
-let isImageGenerating = false;
+const OPENAI_API_KEY = "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";
+
 
 const updateImageCard = (imgDataArray) => {
     imgDataArray.forEach((imgObject, index) => {
@@ -40,21 +40,17 @@ const generateAiImages = async (userPrompt, userImgQuantity) => {
             })
         });
 
-        if(!response.ok) throw new Error("Resim üretilemedi. Tekrar denetiniz.");
+        if(!response.ok) throw new Error("Resim üretilemedi. Tekrar deneyiniz.");
 
         const { data } = await response.json();
         updateImageCard([...data]);
     } catch (error) {
         alert(error.message)
-    } finally {
-        isImageGenerating = false;
-    }
+    } 
 }
 
 const handleFormSubmisson = (e) => {
     e.preventDefault();
-    if(isImageGenerating) return;
-    isImageGenerating = true;
 
     const userPrompt = e.srcElement[0].value;
     const userImgQuantity = e.srcElement[1].value;
